@@ -15,14 +15,9 @@ public class ProductService {
     @Autowired
     ProductsRepository productsRepository;
 
-    public List<Products> getProductList() {
-        return productsRepository.findAll();
-    }
+    public List<Products> getProductList() { return productsRepository.findAll(); }
 
-    public Products addOneProduct(Products product) {
-        return productsRepository.save(product);
-
-    }
+    public Products addOneProduct(Products product) { return productsRepository.save(product); }
 
     public Optional<Products> getProduct(Long id) {
         return productsRepository.findById(id);
@@ -32,4 +27,11 @@ public class ProductService {
         productsRepository.deleteById(id);
         return "deleted";
     }
+
+    public List<Products> getProductsByCategory(String category) { return productsRepository.findAllByCategory(category); }
+
+    public List<Products> getProductsByCategoryAndPrice(String category, Double price1, Double price2) {
+        return productsRepository.findAllByCategoryAndAndPriceBetween(category, price1, price2);
+    }
 }
+

@@ -3,21 +3,25 @@ package com.caseStudy.eCart.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+
 public class Users {
 
-    @Id
-    @GeneratedValue
-    private Long userId;
+
+    /*private Long userId;
     private String name;
     private String email;
     private String password;
     private String mobileNo;
-    private Gender gender;
+    private Gender gender;*/
+    private String status;
 
-
+    public Users(String status) {
+        this.status = status;
+    }
+/*
     public Long getUserId() {
         return userId;
     }
@@ -64,5 +68,13 @@ public class Users {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }*/
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
