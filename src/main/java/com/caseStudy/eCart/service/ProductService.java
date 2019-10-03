@@ -31,7 +31,11 @@ public class ProductService {
     public List<Products> getProductsByCategory(String category) { return productsRepository.findAllByCategory(category); }
 
     public List<Products> getProductsByCategoryAndPrice(String category, Double price1, Double price2) {
-        return productsRepository.findAllByCategoryAndAndPriceBetween(category, price1, price2);
+        return productsRepository.findAllByCategoryAndPriceBetween(category, price1, price2);
+    }
+
+    public List<Products> getProductsByPrice(Double price1, Double price2) {
+        return productsRepository.findAllByPriceBetween(price1, price2);
     }
 }
 
