@@ -2,8 +2,9 @@ package com.caseStudy.eCart.controller;
 
 
 import com.caseStudy.eCart.model.Products;
-import com.caseStudy.eCart.model.User;
+
 import com.caseStudy.eCart.service.ProductService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ public class MainController {
 
     @Autowired
     ProductService productService;
+
 
     @GetMapping("/products")
     public List<Products> getAllProducts() { return productService.getProductList(); }
@@ -42,8 +44,8 @@ public class MainController {
         return productService.deleteProduct(id);
     }
 
-    @GetMapping(path = "/validateLogin", produces = "application/json")
-    public User validateLogin() { return new User("User successfully authenticated"); }
+    /*@GetMapping(path = "/validateLogin", produces = "application/json")
+    public String validateLogin() { return "\"valid\""; }*/
 
     @GetMapping("/products/{category}/{price1}/{price2}")
     public List<Products> getCategoryAndPrice(@PathVariable(value = "category")String category,
@@ -57,5 +59,8 @@ public class MainController {
                                    @PathVariable(value = "price2")Double price2) {
         return productService.getProductsByPrice(price1, price2);
     }
+
+    /*@PostMapping(value = "/addUsers")
+    public Users addUser(@RequestBody  Users user) { return userService.addUser(user); }*/
 
 }
