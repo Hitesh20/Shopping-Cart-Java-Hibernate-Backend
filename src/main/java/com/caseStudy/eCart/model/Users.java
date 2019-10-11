@@ -68,12 +68,12 @@ public class Users {
         this.gender = gender;
     }
 
-    public Boolean getStatus() {
+    public Boolean getActive() {
         return active;
     }
 
-    public void setStatus(Boolean status) {
-        this.active = status;
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public String getRole() {
