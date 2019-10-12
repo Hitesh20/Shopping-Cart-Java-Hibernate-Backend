@@ -2,16 +2,22 @@ package com.caseStudy.eCart.service;
 
 
 import com.caseStudy.eCart.model.Cart;
+import com.caseStudy.eCart.model.OrderHistory;
 import com.caseStudy.eCart.model.Products;
 import com.caseStudy.eCart.model.Users;
 import com.caseStudy.eCart.repository.CartRepository;
+import com.caseStudy.eCart.repository.OrderHistoryRepository;
 import com.caseStudy.eCart.repository.ProductsRepository;
 import com.caseStudy.eCart.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 
 @Transactional
@@ -24,6 +30,8 @@ public class CartService {
     private CartRepository cartRepository;
     @Autowired
     private UsersRepository usersRepository;
+    @Autowired
+    private OrderHistoryRepository orderHistoryRepository;
 
     public void addProduct(Long user_id, Long product_id) {
 
@@ -76,5 +84,23 @@ public class CartService {
         }
         /*return (Cart) cartRepository.findByUsersAndProducts(users, products);*/
 
+    }
+
+    public List<OrderHistory> checkout(Principal principal) {
+        Users users = usersRepository.getByEmail(principal.getName());
+        ArrayList<Cart> cartList = cartRepository.findAllByUsers(users);
+        for(Cart cart : cartList) {
+            OrderHistory orderHistory = new OrderHistory();
+            orderHistory.setUserId(cart.getUsers().getUserId());
+            orderHistory.setQuantity(cart.getQuantity());
+            orderHistory.setPrice(cart.getProducts().getPrice());
+            orderHistory.setName(cart.getProducts().getName());
+            orderHistory.setImage(cart.getProducts().getImage());
+            orderHistory.setProductId(cart.getProducts().getProductId());
+            orderHistory.setDate(new Date());
+            cartRepository.delete(cart);
+            orderHistoryRepository.saveAndFlush(orderHistory);
+        }
+        return orderHistoryRepository.findAllByUserId(users.getUserId());
     }
 }

@@ -6,6 +6,7 @@ import com.caseStudy.eCart.model.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,4 +19,6 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
     List<Cart> findByUsers(Users users);
 
     String deleteAllByUsersAndProducts(Users users, Products products);
+
+    ArrayList<Cart> findAllByUsers(Users users);
 }

@@ -1,5 +1,6 @@
 package com.caseStudy.eCart.controller;
 import com.caseStudy.eCart.model.Cart;
+import com.caseStudy.eCart.model.OrderHistory;
 import com.caseStudy.eCart.service.CartService;
 import com.caseStudy.eCart.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,12 @@ public class CartController {
     @GetMapping("/showCart")
     public List<Cart> showCart(Principal principal) {
         return cartService.showUserProducts(userService.getUserId(principal));
+    }
+
+    @GetMapping("/checkout")
+    public List<OrderHistory> checkOutFromCart(Principal principal) {
+        return cartService.checkout(principal);
+
     }
 
 }
