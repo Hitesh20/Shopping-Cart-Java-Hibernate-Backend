@@ -51,5 +51,17 @@ public class ProductService {
         return oldProduct;
     }
 
+    public List<Products> getSearchedData(String searchedItem) {
+        if(searchedItem.equalsIgnoreCase("footwear") ||
+                searchedItem.equalsIgnoreCase("clothing") ||
+                searchedItem.equalsIgnoreCase("books") ||
+                searchedItem.equalsIgnoreCase("electronics")) {
+            return productsRepository.findAllByCategory(searchedItem);
+        } else {
+            return productsRepository.findAllByName(searchedItem);
+        }
+
+
+    }
 }
 

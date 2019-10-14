@@ -8,6 +8,7 @@ import com.caseStudy.eCart.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,6 +64,11 @@ public class MainController {
     public Products editUsers(@RequestBody Products products)
     {
         return productService.changeProductDescriptions(products);
+    }
+
+    @GetMapping("/search/{searchedItem}")
+    public List<Products> searchItem(@PathVariable("searchedItem") String searchedItem) {
+        return productService.getSearchedData(searchedItem);
     }
 
 
