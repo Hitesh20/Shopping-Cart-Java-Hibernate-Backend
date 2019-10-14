@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 
 
 @RestController
@@ -23,8 +24,10 @@ public class UsersController {
     public String validateLogin() { return "\"valid\""; }
 
     @PostMapping(value = "/addUsers")
-    public Users addUser(@RequestBody Users user) { return userService.addUser(user); }
-
+    public Users addUser(@RequestBody Users user) {
+        System.out.println(userService.addUser(user));
+        return userService.addUser(user);
+    }
 
     @RequestMapping(value="/logout",method = RequestMethod.GET)
     public String logout(HttpServletRequest request, HttpServletResponse response)
@@ -38,5 +41,17 @@ public class UsersController {
             request.getSession().invalidate();
         }
         return "/home";
+    }
+
+    @GetMapping("/callUser")
+    public Users callUsers(Principal principal)
+    {
+        return userService.callUser(principal);
+    }
+
+    @PostMapping("/editUser")
+    public Users editUsers(@RequestBody Users user)
+    {
+        return userService.changeUserDetails(user);
     }
 }

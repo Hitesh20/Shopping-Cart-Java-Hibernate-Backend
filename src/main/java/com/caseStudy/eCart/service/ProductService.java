@@ -24,9 +24,9 @@ public class ProductService {
         return productsRepository.findById(id);
     }
 
-    public String deleteProduct(Long id) {
+    public List<Products> deleteProduct(Long id) {
         productsRepository.deleteById(id);
-        return "deleted";
+        return productsRepository.findAll();
     }
 
     public List<Products> getProductsByCategory(String category) { return productsRepository.findAllByCategory(category); }
@@ -38,5 +38,18 @@ public class ProductService {
     public List<Products> getProductsByPrice(Double price1, Double price2) {
         return productsRepository.findAllByPriceBetween(price1, price2);
     }
+
+    public Products changeProductDescriptions(Products products) {
+        Products oldProduct = productsRepository.findByProductId(products.getProductId());
+        oldProduct.setProductId(products.getProductId());
+        oldProduct.setName(products.getName());
+        //oldProduct.setImage(products.getImage());
+        oldProduct.setPrice(products.getPrice());
+        oldProduct.setCategory(products.getCategory());
+        oldProduct.setDetails(products.getDetails());
+        productsRepository.saveAndFlush(oldProduct);
+        return oldProduct;
+    }
+
 }
 

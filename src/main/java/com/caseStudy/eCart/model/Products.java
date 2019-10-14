@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class Products {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue                 //do not add strategy here... otherwise it will ask for default value of id
     private Long productId;
     private String name;
     private double price;

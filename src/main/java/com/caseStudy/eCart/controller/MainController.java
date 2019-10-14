@@ -34,18 +34,17 @@ public class MainController {
     }
 
     @PostMapping("/addProduct")
+    @ResponseBody
     public Products addProduct(@RequestBody Products product) {
         return productService.addOneProduct(product);
     }
 
-    @DeleteMapping("/products/{id}/delete")
-    public String deleteProduct(@PathVariable("id") Long id)
+    @GetMapping("/products/{id}/delete")
+    public List<Products> deleteProduct(@PathVariable("id") Long id)
     {
         return productService.deleteProduct(id);
     }
 
-    /*@GetMapping(path = "/validateLogin", produces = "application/json")
-    public String validateLogin() { return "\"valid\""; }*/
 
     @GetMapping("/products/{category}/{price1}/{price2}")
     public List<Products> getCategoryAndPrice(@PathVariable(value = "category")String category,
@@ -60,7 +59,12 @@ public class MainController {
         return productService.getProductsByPrice(price1, price2);
     }
 
-    /*@PostMapping(value = "/addUsers")
-    public Users addUser(@RequestBody  Users user) { return userService.addUser(user); }*/
+    @PostMapping("/editProduct")
+    public Products editUsers(@RequestBody Products products)
+    {
+        return productService.changeProductDescriptions(products);
+    }
+
+
 
 }

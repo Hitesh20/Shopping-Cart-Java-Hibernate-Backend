@@ -21,4 +21,20 @@ public class UserService {
         return usersRepository.findByEmail(email).getUserId();
     }
 
+    public Users callUser(Principal principal) {
+        return usersRepository.findByEmail(principal.getName());
+    }
+
+    public Users changeUserDetails(Users users) {
+        Users oldUser = usersRepository.findByUserId(users.getUserId());
+        oldUser.setUserId(users.getUserId());
+        oldUser.setName(users.getName());
+        oldUser.setEmail(users.getEmail());
+        oldUser.setPassword(users.getPassword());
+        oldUser.setName(users.getName());
+        oldUser.setMobileNo(users.getMobileNo());
+        oldUser.setAddress(users.getAddress());
+        usersRepository.saveAndFlush(oldUser);
+        return oldUser;
+    }
 }

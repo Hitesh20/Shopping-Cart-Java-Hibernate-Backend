@@ -47,4 +47,9 @@ public class CartController {
 
     }
 
+    /*@PostMapping("/addProductToBackend")
+    public String addProductToBackend() {
+        return "\"Product added to backend\"";
+    }*/
+
 }

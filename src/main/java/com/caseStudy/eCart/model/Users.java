@@ -1,10 +1,7 @@
 package com.caseStudy.eCart.model;
 import net.bytebuddy.implementation.bind.annotation.Default;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Users {
@@ -13,12 +10,14 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
     private String name;
+    //@Column(unique = true)
     private String email;
     private String password;
     private String mobileNo;
     private String gender;
     private Boolean active = true;
     private String role = "customer";
+    private String address;
 
     public Long getUserId() {
         return userId;
@@ -82,5 +81,13 @@ public class Users {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
