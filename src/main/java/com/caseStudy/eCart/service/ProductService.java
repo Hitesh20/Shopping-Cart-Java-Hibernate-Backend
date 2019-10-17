@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ProductService {
@@ -51,17 +50,20 @@ public class ProductService {
         return oldProduct;
     }
 
-    public List<Products> getSearchedData(String searchedItem) {
-        if(searchedItem.equalsIgnoreCase("footwear") ||
-                searchedItem.equalsIgnoreCase("clothing") ||
-                searchedItem.equalsIgnoreCase("books") ||
-                searchedItem.equalsIgnoreCase("electronics")) {
-            return productsRepository.findAllByCategory(searchedItem);
-        } else {
-            return productsRepository.findAllByName(searchedItem);
+    public Set<Products> getSearchedData(String searchedItem) {
+        List<Products> productsList = productsRepository.findAll();
+        Set<Products> result = new HashSet<>();
+
+        for(int i=0; i<productsList.size(); i++) {
+            if(productsList.get(i).getName().toLowerCase().contains(searchedItem.toLowerCase()) ||
+                    productsList.get(i).getCategory().toLowerCase().contains(searchedItem.toLowerCase()) ||
+                    productsList.get(i).getDetails().toLowerCase().contains(searchedItem.toLowerCase())) {
+
+                result.add(productsList.get(i));
+            }
         }
-
-
+        //System.out.println("Search result yha tak");
+        return result;
     }
 }
 

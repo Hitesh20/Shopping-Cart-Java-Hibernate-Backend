@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 
 @RestController
@@ -67,10 +68,13 @@ public class MainController {
     }
 
     @GetMapping("/search/{searchedItem}")
-    public List<Products> searchItem(@PathVariable("searchedItem") String searchedItem) {
-        return productService.getSearchedData(searchedItem);
+    public Set<Products> searchItem(@PathVariable("searchedItem") String searchedItem) {
+        Set<Products> prod = productService.getSearchedData(searchedItem);
+        for (int i = 0; i < prod.size(); i++) {
+            System.out.println(prod);
+        }
+        return prod;
     }
-
 
 
 }

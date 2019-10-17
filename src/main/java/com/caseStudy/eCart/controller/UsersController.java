@@ -19,6 +19,8 @@ public class UsersController {
 
     @Autowired
     UserService userService;
+    private HttpServletRequest request;
+    private HttpServletResponse response;
 
     @GetMapping(path = "/validateLogin", produces = "application/json")
     public String validateLogin() { return "\"valid\""; }
@@ -54,4 +56,5 @@ public class UsersController {
     {
         return userService.changeUserDetails(user);
     }
+
 }

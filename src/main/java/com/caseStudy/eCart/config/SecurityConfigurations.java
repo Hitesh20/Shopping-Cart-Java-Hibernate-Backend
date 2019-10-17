@@ -41,6 +41,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
                 .antMatchers("/search/{searchedItem}").permitAll()
                 .antMatchers("/products/{category}/{price1}/{price2}").permitAll()
                 .antMatchers("/products/{price1}/{price2}").permitAll()
+                .antMatchers("/search/{searchedItem}").permitAll()
                 .anyRequest().authenticated().and().httpBasic();
         http.cors();
     }
