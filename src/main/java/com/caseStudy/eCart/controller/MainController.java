@@ -70,9 +70,9 @@ public class MainController {
     @GetMapping("/search/{searchedItem}")
     public Set<Products> searchItem(@PathVariable("searchedItem") String searchedItem) {
         Set<Products> prod = productService.getSearchedData(searchedItem);
-        for (int i = 0; i < prod.size(); i++) {
+        /*for (int i = 0; i < prod.size(); i++) {
             System.out.println(prod);
-        }
+        }*/
         return prod;
     }
 

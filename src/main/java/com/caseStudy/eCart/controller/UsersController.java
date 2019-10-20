@@ -31,7 +31,7 @@ public class UsersController {
         return userService.addUser(user);
     }
 
-    @RequestMapping(value="/logout",method = RequestMethod.GET)
+    /*@RequestMapping(value="/logout",method = RequestMethod.GET)
     public String logout(HttpServletRequest request, HttpServletResponse response)
     {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -43,7 +43,7 @@ public class UsersController {
             request.getSession().invalidate();
         }
         return "/home";
-    }
+    }*/
 
     @GetMapping("/callUser")
     public Users callUsers(Principal principal)

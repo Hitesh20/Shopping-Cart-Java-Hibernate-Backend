@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.File;
 
 @Entity
 public class Products {
@@ -16,7 +17,7 @@ public class Products {
     private String category;
     private String image;
     private String details;
-
+    // private File img;
 
     public Long getProductId() {
         return productId;
